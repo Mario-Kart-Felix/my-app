@@ -6,7 +6,9 @@ import classes from "./App.css";
 // react scipts > 2.0 use
 // import classes from "./App.module.css";
 // import "./App.css";
-import Person from "./Person/Person.js";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
+// import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 // now uses
 // https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/
@@ -96,22 +98,23 @@ class App extends Component {
     // const style = {};
     let persons = null;
     // let btnClass = [classes.Button];
-    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-              />
-            );
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}
+
+            //     click={() => this.deletePersonHandler(index)}
+            //     name={person.name}
+            //     age={person.age}
+            //     changed={(event) => this.nameChangedHandler(event, person.id)}
+            //   />
+            // </ErrorBoundary>
+          />
+
           {/* <Person
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
@@ -136,35 +139,21 @@ class App extends Component {
       //   color: "black",
       // };
       // btnClass.push(classes.Red);
-      btnClass = classes.Red;
-    }
-
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red); // assignedClasses red
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold); // classess red
     }
 
     return (
       // <StyleRoot>
       <div className={classes.App}>
-        <h1>Hi I'm a React App2 </h1>
-        <p className={assignedClasses.join(" ")}>this is really working</p>
-        <button
-          // style={style}
-          // className={btnClass.join(" ")}
-          className={btnClass}
-          // below uses a anno fuction => implicit return
-          onClick={this.togglePersonsHandler}
-        >
-          Toggle Persons
-        </button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}
+        ></Cockpit>
         {/* <StyledButton
           myAlt={this.state.showPersons}
           onClick={this.togglePersonsHandler}
         >
+
           Toggle Persons
         </StyledButton> */}
         {/* {this.state.showPersons ? ( */}
