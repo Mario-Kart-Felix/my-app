@@ -2,8 +2,14 @@ import React, { Component } from "react";
 // import styled from "styled-components";
 // import Radium, { StyleRoot } from "radium";
 // import logo from "./logo.svg";
-import "./App.css";
+import classes from "./App.css";
+// react scipts > 2.0 use
+// import classes from "./App.module.css";
+// import "./App.css";
 import Person from "./Person/Person.js";
+
+// now uses
+// https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/
 
 // const StyledButton = styled.button`
 //   background-color: ${(props) => (props.myAlt ? "red" : "green")};
@@ -87,8 +93,10 @@ class App extends Component {
 
   /* <button onClick={this.switchNameHandler.bind(this, "Maximilian")}></button> */
   render() {
-    const style = {};
+    // const style = {};
     let persons = null;
+    // let btnClass = [classes.Button];
+    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
@@ -127,23 +135,27 @@ class App extends Component {
       //   backgroundColor: "salmon",
       //   color: "black",
       // };
+      // btnClass.push(classes.Red);
+      btnClass = classes.Red;
     }
 
-    const classess = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classess.push("red"); // classess red
+      assignedClasses.push(classes.red); // assignedClasses red
     }
     if (this.state.persons.length <= 1) {
-      classess.push("bold"); // classess red
+      assignedClasses.push(classes.bold); // classess red
     }
 
     return (
       // <StyleRoot>
-      <div className="App">
-        <h1>Hi I'm a React App</h1>
-        <p className={classess.join(" ")}>this is really working</p>
+      <div className={classes.App}>
+        <h1>Hi I'm a React App2 </h1>
+        <p className={assignedClasses.join(" ")}>this is really working</p>
         <button
-          style={style}
+          // style={style}
+          // className={btnClass.join(" ")}
+          className={btnClass}
           // below uses a anno fuction => implicit return
           onClick={this.togglePersonsHandler}
         >
