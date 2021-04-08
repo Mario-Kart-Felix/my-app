@@ -1,8 +1,23 @@
 import React, { Component } from "react";
+// import styled from "styled-components";
+// import Radium, { StyleRoot } from "radium";
 // import logo from "./logo.svg";
 import "./App.css";
 import Person from "./Person/Person.js";
 
+// const StyledButton = styled.button`
+//   background-color: ${(props) => (props.myAlt ? "red" : "green")};
+//   color: white;
+//   font: inherit;
+//   border: 1px solid black;
+//   padding: 8px;
+//   cursor: pointer;
+
+//   &:hover {
+//     background-color: ${(props) => (props.myAlt ? "salmon" : "lightgreen")};
+//     color: black;
+//   }
+// `;
 class App extends Component {
   state = {
     persons: [
@@ -72,13 +87,7 @@ class App extends Component {
 
   /* <button onClick={this.switchNameHandler.bind(this, "Maximilian")}></button> */
   render() {
-    const style = {
-      backgroundColor: "white",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-    };
+    const style = {};
     let persons = null;
 
     if (this.state.showPersons) {
@@ -113,12 +122,26 @@ class App extends Component {
           /> */}
         </div>
       );
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black",
+      // };
+    }
+
+    const classess = [];
+    if (this.state.persons.length <= 2) {
+      classess.push("red"); // classess red
+    }
+    if (this.state.persons.length <= 1) {
+      classess.push("bold"); // classess red
     }
 
     return (
+      // <StyleRoot>
       <div className="App">
         <h1>Hi I'm a React App</h1>
-        <p>this is really working</p>
+        <p className={classess.join(" ")}>this is really working</p>
         <button
           style={style}
           // below uses a anno fuction => implicit return
@@ -126,6 +149,12 @@ class App extends Component {
         >
           Toggle Persons
         </button>
+        {/* <StyledButton
+          myAlt={this.state.showPersons}
+          onClick={this.togglePersonsHandler}
+        >
+          Toggle Persons
+        </StyledButton> */}
         {/* {this.state.showPersons ? ( */}
         {persons}
         {/* ) : null} */}
@@ -141,8 +170,8 @@ class App extends Component {
   }
 }
 
+// export default Radium(App);
 export default App;
-
 /// using Web Hooks :
 
 // import React, { useState } from "react";
