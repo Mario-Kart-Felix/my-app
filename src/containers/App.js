@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import styled from "styled-components";
+// https://www.udemy.com/user/vignesh-818/?key=subscribed_courses&subscribed_courses=1
 // import Radium, { StyleRoot } from "radium";
 // import logo from "./logo.svg";
 import classes from "./App.css";
@@ -7,6 +8,7 @@ import classes from "./App.css";
 // import classes from "./App.module.css";
 // import "./App.css";
 import Persons from "../components/Persons/Persons";
+import WithClass from "../hoc/WithClass";
 import Cockpit from "../components/Cockpit/Cockpit";
 // import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
@@ -39,6 +41,7 @@ class App extends Component {
     ],
     otherState: "some other value",
     showPersons: false,
+    showCockpit: true,
   };
 
   togglePersonsHandler = (event) => {
@@ -168,13 +171,22 @@ class App extends Component {
 
     return (
       // <StyleRoot>
-      <div className={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonsHandler}
-        ></Cockpit>
+      <WithClass classes={classes.App}>
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonsHandler}
+          ></Cockpit>
+        ) : null}
         {/* <StyledButton
           myAlt={this.state.showPersons}
           onClick={this.togglePersonsHandler}
@@ -185,7 +197,7 @@ class App extends Component {
         {/* {this.state.showPersons ? ( */}
         {persons}
         {/* ) : null} */}
-      </div>
+      </WithClass>
     );
     // return React.createElement("div", null, "h1", "Hi I'm a React App!!!");
     // nested below

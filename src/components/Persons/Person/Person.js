@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 // import styled from "styled-components";
 // import Radium from "radium";
 import classes from "./Person.css";
@@ -19,7 +19,8 @@ import classes from "./Person.css";
 class Person extends Component {
   render() {
     return (
-      <div className={classes.Person}>
+      // <div className={classes.Person}>
+      <Fragment>
         {/* <StyleDiv> */}
         <p onClick={this.props.click}>
           I'm a {this.props.name}! and I am {this.props.age} years old!
@@ -31,7 +32,8 @@ class Person extends Component {
           value={this.props.name}
         />
         {/* </StyleDiv> */}
-      </div>
+        {/* </div> */}
+      </Fragment>
     );
   }
 }

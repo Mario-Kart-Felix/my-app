@@ -42,6 +42,7 @@ const cockpit = (props) => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(" ")}>this is really working</p>
+
       <button
         // style={style}
         // className={btnClass.join(" ")}
@@ -54,5 +55,5 @@ const cockpit = (props) => {
     </div>
   );
 };
-
-export default cockpit;
+// conditional render
+export default React.memo(cockpit);
