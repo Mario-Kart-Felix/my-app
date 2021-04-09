@@ -51,8 +51,20 @@ class App extends Component {
     return state;
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] ShouldCompUpdate!");
+    return true;
+  }
+
+  // http on below two
   componentDidMount() {
     console.log("[App.js] component Mounted");
+  }
+
+  componentDidUpdate() {
+    // can do http here
+    // don't update state
+    console.log("[App.js] componentDidUpate");
   }
 
   // switchNameHandler = (newName) => {
