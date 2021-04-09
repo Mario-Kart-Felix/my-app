@@ -24,6 +24,11 @@ class Persons extends Component {
     console.log(snapshot);
   }
 
+  //WARNING! To be deprecated in React v17. Use componentDidUpdate instead.
+  componentWillUnmount() {
+    console.log("[Persons.js] componentWill Unmount");
+  }
+
   render() {
     return this.props.persons.map((person, index) => {
       return (

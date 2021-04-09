@@ -5,7 +5,25 @@ const cockpit = (props) => {
   useEffect(() => {
     console.log("[Cockpit.js] useEffect");
     // http request...
+    setTimeout(() => {
+      alert("saved data to cloud");
+    }, 1000);
+    return () => {
+      console.log("[cockpit.js] cleanup work in useEffect");
+    };
   }, []);
+  // use [] to run after component destroyed
+  // or  [props.persons] runs when listed props changes
+
+  //
+  useEffect(() => {
+    console.log("[Cockpit.js] 2nd useEffect");
+    // http request...
+
+    return () => {
+      console.log("[cockpit.js] cleanup work in 2nd useEffect");
+    };
+  }); // runs on every update cycle with no args
 
   const assignedClasses = [];
   let btnClass = "";
