@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import classes from "./Cockpit.css";
 import AuthContext from "../../context/auth-context";
 const cockpit = (props) => {
   const toggleBtnRef = useRef(null);
+  // useContex Hook below
+  const authContext = useContext(AuthContext);
   // this doesn't work as it is call b4 the render
   // toggleBtnRef.current.click();
-
+  // console.log(authContext);
   useEffect(() => {
     console.log("[Cockpit.js] useEffect");
     // http request...
@@ -58,9 +60,10 @@ const cockpit = (props) => {
       >
         Toggle Persons
       </button>
-      <AuthContext.Consumer>
+      {/* <AuthContext.Consumer>
         {(context) => <button onClick={context.login}> Log in </button>}
-      </AuthContext.Consumer>
+      </AuthContext.Consumer> */}
+      <button onClick={authContext.login}> Log in </button>
     </div>
   );
 };
