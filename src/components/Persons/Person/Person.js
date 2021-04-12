@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 // import styled from "styled-components";
 // import Radium from "radium";
+// withClass is a HOC that add styling and wrapping div/
+// it takes 2 x args class comp and classess from .css
+import withClass from "../../../hoc/withClass";
 import classes from "./Person.css";
 
 // const StyleDiv = styled.div`
@@ -39,4 +42,4 @@ class Person extends Component {
 }
 
 // export default Radium(person);
-export default Person;
+export default withClass(Person, classes.Person);

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 // import styled from "styled-components";
 // https://www.udemy.com/user/vignesh-818/?key=subscribed_courses&subscribed_courses=1
 // import Radium, { StyleRoot } from "radium";
@@ -8,7 +8,7 @@ import classes from "./App.css";
 // import classes from "./App.module.css";
 // import "./App.css";
 import Persons from "../components/Persons/Persons";
-import WithClass from "../hoc/WithClass";
+import withClass from "../hoc/withClass";
 import Cockpit from "../components/Cockpit/Cockpit";
 // import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
@@ -171,7 +171,8 @@ class App extends Component {
 
     return (
       // <StyleRoot>
-      <WithClass classes={classes.App}>
+      // <WithClass classes={classes.App}>
+      <Fragment>
         <button
           onClick={() => {
             this.setState({ showCockpit: false });
@@ -197,7 +198,8 @@ class App extends Component {
         {/* {this.state.showPersons ? ( */}
         {persons}
         {/* ) : null} */}
-      </WithClass>
+        {/* </WithClass> */}
+      </Fragment>
     );
     // return React.createElement("div", null, "h1", "Hi I'm a React App!!!");
     // nested below
@@ -210,7 +212,7 @@ class App extends Component {
 }
 
 // export default Radium(App);
-export default App;
+export default withClass(App, classes.App);
 /// using Web Hooks :
 
 // import React, { useState } from "react";
