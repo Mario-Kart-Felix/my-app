@@ -1,18 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Cockpit.css";
-
+import AuthContext from "../../context/auth-context";
 const cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+  // this doesn't work as it is call b4 the render
+  // toggleBtnRef.current.click();
+
   useEffect(() => {
     console.log("[Cockpit.js] useEffect");
     // http request...
-    setTimeout(() => {
-      alert("saved data to cloud");
-    }, 1000);
+    // setTimeout(() => {
+    //   alert("saved data to cloud");
+    // }, 1000);
+    toggleBtnRef.current.click();
     return () => {
       console.log("[cockpit.js] cleanup work in useEffect");
     };
   }, []);
-  // use [] to run after component destroyed
+  // use [] for run only on first render
   // or  [props.persons] runs when listed props changes
 
   //
@@ -44,6 +49,7 @@ const cockpit = (props) => {
       <p className={assignedClasses.join(" ")}>this is really working</p>
 
       <button
+        ref={toggleBtnRef}
         // style={style}
         // className={btnClass.join(" ")}
         className={btnClass}
@@ -52,6 +58,9 @@ const cockpit = (props) => {
       >
         Toggle Persons
       </button>
+      <AuthContext.Consumer>
+        {(context) => <button onClick={context.login}> Log in </button>}
+      </AuthContext.Consumer>
     </div>
   );
 };

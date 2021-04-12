@@ -8,6 +8,7 @@ import classes from "./App.css";
 // import classes from "./App.module.css";
 // import "./App.css";
 import Persons from "../components/Persons/Persons";
+import AuthContext from "../context/auth-context";
 import withClass from "../hoc/withClass";
 import Cockpit from "../components/Cockpit/Cockpit";
 // import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
@@ -42,6 +43,8 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false,
     showCockpit: true,
+    changeCounter: 0,
+    auth: false,
   };
 
   togglePersonsHandler = (event) => {
@@ -116,9 +119,21 @@ class App extends Component {
     // main state is changed at index with person
     persons[personIndex] = person;
 
-    this.setState({
-      persons: persons,
+    // this.setState({
+    //   persons: persons,
+    //   // changeCounter: this.state.changeCounter + 1,
+    // });
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1,
+        // changeCounter: this.state.changeCounter + 1,
+      };
     });
+  };
+
+  loginHandler = () => {
+    this.setState({ auth: true });
   };
 
   /* <button onClick={this.switchNameHandler.bind(this, "Maximilian")}></button> */
@@ -134,7 +149,7 @@ class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler}
-
+            isAuthenticated={this.state.auth}
             //     click={() => this.deletePersonHandler(index)}
             //     name={person.name}
             //     age={person.age}
@@ -180,23 +195,31 @@ class App extends Component {
         >
           Remove Cockpit
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-            clicked={this.togglePersonsHandler}
-          ></Cockpit>
-        ) : null}
-        {/* <StyledButton
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.auth,
+            login: this.loginHandler,
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+              // login={this.loginHandler}
+            ></Cockpit>
+          ) : null}
+          {/* <StyledButton
           myAlt={this.state.showPersons}
           onClick={this.togglePersonsHandler}
         >
 
           Toggle Persons
         </StyledButton> */}
-        {/* {this.state.showPersons ? ( */}
-        {persons}
+          {/* {this.state.showPersons ? ( */}
+          {persons}
+        </AuthContext.Provider>
         {/* ) : null} */}
         {/* </WithClass> */}
       </Fragment>
